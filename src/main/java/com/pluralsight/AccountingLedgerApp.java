@@ -5,9 +5,14 @@ Purpose: This project is a Java app that lets a business add, save, and view its
  */
 
 package com.pluralsight;
+//Imports for reading the file, dates, times, and lists
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 
 public class AccountingLedgerApp {
@@ -52,9 +57,35 @@ public class AccountingLedgerApp {
                 default -> System.out.println("That's not on the menu. Pick again!");
             }
 
+
+
         }
 
+
     }
+    // create method that reads the file
+    public static void readTransactions() throws IOException{
+        //open the file so we can read it line by line
+        BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"));
+        // Read the first line (the header) and skip it
+        reader.readLine();
+        //This line will hold one line at a time
+        String line;
+        while ((line = reader.readLine()) != null){
+            String[] parts = line.split("\\|");
+            // Turn each piece into the right type
+            LocalDate date = LocalDate.parse(parts[0]);
+            LocalTime time = LocalTime.parse(parts[1]);
+            String description = parts[2];
+            String vendor = parts[3];
+            double amount = Double.parseDouble(parts[4]);
+
+        }
+        reader.close();
+
+    }
+
+
 }
 
 
