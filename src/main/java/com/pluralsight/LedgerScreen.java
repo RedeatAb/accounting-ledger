@@ -21,8 +21,9 @@ public class LedgerScreen {
 
             // Getting the user's input from the main class
             System.out.print("Choose wisely: ");
-            String choice = AccountingLedgerApp.userInput
-                    .nextLine().trim().toUpperCase();
+
+            String choice = AccountingLedgerApp.userInput.nextLine().trim().toUpperCase();
+
             // Switch statement for the different ledger options
             switch (choice) {
 
@@ -55,21 +56,19 @@ public class LedgerScreen {
             //getting one transaction from list
             Transaction transaction = transactions.get(i);
             if (choice.equals("A")) {
-
-                // Showing all transactions
-
-
-            } else if (choice.equals("D") && transaction.getAmount() > 0) {
-
-                // Showing deposits only
-
-
-            } else if (choice.equals("P") && transaction.getAmount() < 0) {
-
-                // Showing payments only
+                //showing all the transactions
+                printTransaction(transaction);
+            }
+            else if (choice.equals("D") && transaction.getAmount() > 0) {
+                //showing deposits
+                printTransaction(transaction);
 
             }
-            // Method to print one transaction
+            else if (choice.equals("P") && transaction.getAmount() < 0) {
+                //showing payments
+                printTransaction(transaction);
+
+            }
 
         }
     }
@@ -87,5 +86,5 @@ public class LedgerScreen {
 
 
     }
-}
+
 
