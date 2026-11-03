@@ -12,17 +12,20 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.time.format.DateTimeFormatter;
 
 
 public class AccountingLedgerApp {
     //creating one static method in the class can share the same one
     static Scanner userInput = new Scanner(System.in);
+    //creating static arraylist to be used
+    static ArrayList<Transaction> transactions = new ArrayList<>();
 
-    public static void main(String[] args) {
 
-
-
+    public static void main(String[] args)throws IOException {
 
         System.out.println("********************************* ");
         System.out.println("                                  ");
@@ -63,8 +66,10 @@ public class AccountingLedgerApp {
 
 
     }
-    // create method that reads the file
-    public static void readTransactions() throws IOException{
+    // create an array list method to give back the parsed list
+    public static ArrayList<Transaction> readTransactions() throws IOException{
+        //make the list inisde the method
+        ArrayList<Transaction> parsedTransactions = new ArrayList<>();
         //open the file so we can read it line by line
         BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"));
         // Read the first line (the header) and skip it
@@ -80,10 +85,40 @@ public class AccountingLedgerApp {
             String vendor = parts[3];
             double amount = Double.parseDouble(parts[4]);
 
+            Transaction orderedTransaction = new Transaction(date, time , description , vendor , amount );
+            parsedTransactions.add(orderedTransaction);
         }
+        //closing the reader
         reader.close();
+        //returning the parsed data
+        return parsedTransactions;
 
     }
+    //create  the write method
+    public static void writeTransaction(Transaction transaction)throws IOException {
+        // Open the CSV file and add new information
+        BufferedWriter writer = new BufferedWriter(
+                new FileWriter("transactions.csv", true)
+        );
+
+        // Get the information from the Transaction object
+        String line = transaction.getDate() + "|"
+                + transaction.getTime().withNano(0) + "|"
+                + transaction.getDescription() + "|"
+                + transaction.getVendor() + "|"
+                + transaction.getAmount();
+
+        // Write the transaction into the file
+        writer.write(line);
+
+        // Move to a new line
+        writer.newLine();
+
+        // Close the writer
+        writer.close();
+
+    }
+
 
 
 }
