@@ -25,7 +25,13 @@ public class AccountingLedgerApp {
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
 
+
     public static void main(String[] args)throws IOException {
+
+
+
+        System.out.println("Transaction saved successfully!");
+
 
         System.out.println("********************************* ");
         System.out.println("                                  ");
@@ -117,6 +123,42 @@ public class AccountingLedgerApp {
         // Close the writer
         writer.close();
 
+    }
+    // creating the method to add a deposit
+
+    public static void addDeposit() throws IOException {
+
+        // Ask the user what the deposit is for
+        System.out.print("Enter deposit description: ");
+        String description = userInput.nextLine();
+
+        // Ask where the money came from
+        System.out.print("Enter vendor: ");
+        String vendor = userInput.nextLine();
+
+        // Ask how much money was deposited
+        System.out.print("Enter deposit amount: ");
+        double amount = Double.parseDouble(userInput.nextLine());
+
+        // Make sure the deposit is positive
+        if (amount <= 0) {
+            System.out.println("Deposit must be greater than zero.");
+            return;
+        }
+
+        // Get the current date and time
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        // Create a new transaction
+        Transaction deposit = new Transaction(
+                date, time, description, vendor, amount
+        );
+
+        // Save the deposit into the CSV file
+        writeTransaction(deposit);
+
+        System.out.println("Deposit saved successfully!");
     }
 
 
