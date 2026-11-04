@@ -152,4 +152,34 @@ public class ReportScreen {
             }
         }
     }
+    // Method to search for transactions by vendor
+    public static void searchByVendor() throws IOException {
+
+        // Asking the user for a vendor name
+        System.out.print("Enter vendor name: ");
+
+        // Saving the vendor name entered by the user
+        String vendor = AccountingLedgerApp.userInput.nextLine();
+
+        // Reading all transactions from the CSV file
+        ArrayList<Transaction> transactions =
+                ReadWriteTransaction.readTransactions();
+
+        // Looping backwards through the transactions
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            // Getting one transaction from the list
+            Transaction transaction = transactions.get(i);
+
+            // Getting the vendor name from the transaction
+            String transactionVendor = transaction.getVendor();
+
+            // Checking if the vendor names match
+            if (transactionVendor.equalsIgnoreCase(vendor)) {
+
+                // Displaying the matching transaction
+                LedgerScreen.printTransaction(transaction);
+            }
+        }
+    }
 }
