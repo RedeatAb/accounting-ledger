@@ -29,6 +29,21 @@ public class AccountingLedgerApp {
     public static void main(String[] args)throws IOException {
 
 
+
+        }
+    }
+    // method for the welcome message
+    public static void  welcomeMessage(){
+        System.out.println("********************************* ");
+        System.out.println("                                  ");
+        System.out.println("                                  ");
+        System.out.println("          PRETTY PENNY             ");
+        System.out.println("    Cute outfits, cuter profits    ");
+        System.out.println("                                   ");
+        System.out.println("                                   ");
+        System.out.println("**********************************");
+    }
+    public static void homeScreen(){
         boolean appRunning = true;
         // using the while loop to display the home screen
         while (appRunning) {
@@ -51,19 +66,6 @@ public class AccountingLedgerApp {
                 }
                 default -> System.out.println("That's not on the menu. Pick again!");
             }
-
-        }
-    }
-    // method for the welcome message
-    public static void  welcomeMessage(){
-        System.out.println("********************************* ");
-        System.out.println("                                  ");
-        System.out.println("                                  ");
-        System.out.println("          PRETTY PENNY             ");
-        System.out.println("    Cute outfits, cuter profits    ");
-        System.out.println("                                   ");
-        System.out.println("                                   ");
-        System.out.println("**********************************");
     }
 
     // create an array list method to give back the parsed list
