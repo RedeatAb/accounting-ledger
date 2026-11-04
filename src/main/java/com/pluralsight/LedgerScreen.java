@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class LedgerScreen {
     // Creating a method for the ledger menu
-    public static void showLedger() throws IOException {
+    public static void showLedger() throws IOException   {
         // Using a boolean to keep the menu running
         boolean ledgerRunning = true;
         // Loop until the user chooses to go back
@@ -33,7 +33,7 @@ public class LedgerScreen {
 
                 case "P" -> showTransactions("P");
 
-                case "R" -> System.out.println("");
+                case "R" -> ReportScreen.showReports();
 
                 // Stops the loop and goes back to the home screen
                 case "H" -> ledgerRunning = false;

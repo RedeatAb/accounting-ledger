@@ -51,16 +51,26 @@ public class AccountingLedgerApp {
             // string to store the user choice
             String userChoice = userInput.nextLine().trim().toUpperCase();
             //create a switch statment to direct the choices in to the desired output
-            switch (userChoice) {
-                case "D" -> System.out.println();
-                case "P" -> System.out.println("payment");
-                case "L" -> System.out.println();
-                case "X" -> {
-                    System.out.println(" Closing!");
-                    appRunning = false;
+            try{
+                switch (userChoice) {
+                    case "D" -> DepositAndPayment.addDeposit();
+                    case "P" -> DepositAndPayment.makePayment();
+                    case "L" -> LedgerScreen.showLedger();
+                    case "X" -> {
+                        System.out.println(" Closing!");
+                        appRunning = false;
+                    }
+                    default -> System.out.println("That's not on the menu. Pick again!");
                 }
-                default -> System.out.println("That's not on the menu. Pick again!");
+            }catch (IOException e) {
+
+                // Runs if there is an error reading the file
+                System.out.println("Error opening the Ledger.");
+
+                // Displays the error message
+                System.out.println(e.getMessage());
             }
+
         }
     }
 
