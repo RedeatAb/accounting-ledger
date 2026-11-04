@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class ReadWriteTransaction {
-    public static ArrayList<Transaction> readTransactions() throws IOException{
+    public static ArrayList<Transaction> readTransactions() {
         //make the list inisde the method
         ArrayList<Transaction> parsedTransactions = new ArrayList<>();
         try {
@@ -39,6 +39,33 @@ public class ReadWriteTransaction {
         }
         //returning the parsed data
         return parsedTransactions;
+
+    }
+    public static void writeTransaction(Transaction transaction)  {
+        // Open the CSV file and add new information
+        try{BufferedWriter writer = new BufferedWriter(
+                new FileWriter("transactions.csv", true));
+
+            // Get the information from the Transaction object
+            String line = transaction.getDate() + "|"
+                    + transaction.getTime().withNano(0) + "|"
+                    + transaction.getDescription() + "|"
+                    + transaction.getVendor() + "|"
+                    + transaction.getAmount();
+
+            // Write the transaction into the file
+            writer.write(line);
+
+            // Move to a new line
+            writer.newLine();
+
+            // Close the writer
+            writer.close();
+
+        }catch(IOException e){
+            System.out.println("sorry could not save the file ");
+        }
+
 
     }
 
