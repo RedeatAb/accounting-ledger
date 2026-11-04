@@ -67,4 +67,89 @@ public class ReportScreen {
             }
         }
     }
+    // Method to display transactions from last month
+    public static void previousMonth() throws IOException {
+
+        // Reading all transactions from the CSV file
+        ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
+
+        // Getting last month's date
+        LocalDate lastMonth = LocalDate.now().minusMonths(1);
+
+        // Looping backwards through the transactions
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            // Getting one transaction from the list
+            Transaction transaction = transactions.get(i);
+
+            // Getting the transaction date
+            LocalDate date = transaction.getDate();
+
+            // Checking if the transaction is from last month
+            if (date.getMonthValue() == lastMonth.getMonthValue()
+                    && date.getYear() == lastMonth.getYear()) {
+
+                // Displaying the transaction
+                LedgerScreen.printTransaction(transaction);
+            }
+        }
+    }
+    // Method to display transactions from this year
+    public static void yearToDate() throws IOException {
+
+        // Reading all transactions from the CSV file
+        ArrayList<Transaction> transactions =
+                ReadWriteTransaction.readTransactions();
+
+        // Getting today's date
+        LocalDate today = LocalDate.now();
+
+        // Looping backwards through the transactions
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            // Getting one transaction from the list
+            Transaction transaction = transactions.get(i);
+
+            // Getting the date of the transaction
+            LocalDate date = transaction.getDate();
+
+            // Checking if the year matches the current year
+            // Also checking that the date is not in the future
+            if (date.getYear() == today.getYear()
+                    && !date.isAfter(today)) {
+
+                // Displaying the transaction
+                LedgerScreen.printTransaction(transaction);
+            }
+        }
+    }
+
+
+    // Method to display transactions from last year
+    public static void previousYear() throws IOException {
+
+        // Reading all transactions from the CSV file
+        ArrayList<Transaction> transactions =
+                ReadWriteTransaction.readTransactions();
+
+        // Getting last year
+        int lastYear = LocalDate.now().getYear() - 1;
+
+        // Looping backwards through the transactions
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+
+            // Getting one transaction from the list
+            Transaction transaction = transactions.get(i);
+
+            // Getting the transaction date
+            LocalDate date = transaction.getDate();
+
+            // Checking if the transaction is from last year
+            if (date.getYear() == lastYear) {
+
+                // Displaying the transaction
+                LedgerScreen.printTransaction(transaction);
+            }
+        }
+    }
 }
