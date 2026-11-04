@@ -5,17 +5,11 @@ Purpose: This project is a Java app that lets a business add, save, and view its
  */
 
 package com.pluralsight;
-//Imports for reading the file, dates, times, and lists
+//Imports for scanner array list and error handling
+
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.io.IOException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.time.format.DateTimeFormatter;
 
 
 public class AccountingLedgerApp {
@@ -26,14 +20,13 @@ public class AccountingLedgerApp {
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
 
-
-    public static void main(String[] args)throws IOException {
+    public static void main(String[] args) throws IOException {
         welcomeMessage();
         homeScreen();
     }
 
     // method for the welcome message
-    public static void  welcomeMessage(){
+    public static void welcomeMessage() {
         System.out.println("********************************* ");
         System.out.println("                                  ");
         System.out.println("                                  ");
@@ -70,12 +63,6 @@ public class AccountingLedgerApp {
             }
         }
     }
-
-
-
-
-
-
 
 
 }

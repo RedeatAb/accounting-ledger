@@ -1,17 +1,18 @@
 package com.pluralsight;
+//importing date time and scanner
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
 //class handles adding deposit and payments
 public class DepositAndPayment {
+
     // Use the same shared Scanner from the main app
     static Scanner userInput = AccountingLedgerApp.userInput;
 
 
-    public static void addDeposit()  {
+    public static void addDeposit() {
 
         // Ask the user what the deposit is for
         System.out.print("Enter deposit description: ");
@@ -41,14 +42,13 @@ public class DepositAndPayment {
         );
 
         // Save the deposit into the CSV file
-        ReadWriteTransaction.writeTransaction (deposit);
+        ReadWriteTransaction.writeTransaction(deposit);
 
         System.out.println("Deposit saved successfully!");
     }
 
 
-
-    public static void makePayment()  {
+    public static void makePayment() {
 
         // Ask what the payment was for
         System.out.print("Enter payment description: ");
