@@ -47,7 +47,7 @@ public class LedgerScreen {
 
         // Calling the read method to get the saved transactions
         ArrayList<Transaction> transactions =
-                AccountingLedgerApp.readTransactions();
+                ReadWriteTransaction.readTransactions();
 
 
         // Looping through the list backwards to show newest entries first
