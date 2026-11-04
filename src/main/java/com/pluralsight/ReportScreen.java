@@ -7,7 +7,7 @@ import java.time.LocalDate;
 //class that obtains report based on vendor or time
 public class ReportScreen {
     // This method displays the reports menu
-    public static void showReports() throws IOException {
+    public static void showReports()  {
 
         // Keeps the reports menu running
         boolean reportRunning = true;
@@ -25,17 +25,27 @@ public class ReportScreen {
             System.out.print("Choose an option: ");
 
             String choice = AccountingLedgerApp.userInput.nextLine();
+            try{
+                switch (choice) {
 
-            switch (choice) {
+                    case "1" ->monthToDate() ;
+                    case "2" ->previousMonth();
+                    case "3" -> yearToDate();
+                    case "4" ->previousYear();
+                    case "5" -> searchByVendor();
+                    case "0" -> reportRunning = false;
 
-                case "1" -> ;
-                case "2" ->
-                case "3" ->
-                case "4" ->
-                case "0" -> reportRunning = false;
+                    default -> System.out.println("Invalid choice!");
+                }
 
-                default -> System.out.println("Invalid choice!");
+            }catch (IOException e) {
+
+                // Displaying an error if the CSV file cannot be read
+                System.out.println("Error reading transactions.");
+                System.out.println(e.getMessage());
             }
+
+
         }
     }
     // Method to display transactions from this month
