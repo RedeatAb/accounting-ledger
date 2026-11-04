@@ -21,17 +21,17 @@ import java.time.format.DateTimeFormatter;
 public class AccountingLedgerApp {
     //creating one static method in the class can share the same one
     static Scanner userInput = new Scanner(System.in);
+
     //creating static arraylist to be used
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
 
 
     public static void main(String[] args)throws IOException {
-
-
-
-        }
+        welcomeMessage();
+        homeScreen();
     }
+
     // method for the welcome message
     public static void  welcomeMessage(){
         System.out.println("********************************* ");
@@ -43,7 +43,9 @@ public class AccountingLedgerApp {
         System.out.println("                                   ");
         System.out.println("**********************************");
     }
-    public static void homeScreen(){
+
+    //method to for home screen
+    public static void homeScreen() {
         boolean appRunning = true;
         // using the while loop to display the home screen
         while (appRunning) {
@@ -54,48 +56,22 @@ public class AccountingLedgerApp {
             System.out.println("X) Bye Bestie! (Exit)");
             System.out.print("\n Choose wisley: ");
             // string to store the user choice
-            String userChoice =userInput.nextLine().trim().toUpperCase();
+            String userChoice = userInput.nextLine().trim().toUpperCase();
             //create a switch statment to direct the choices in to the desired output
             switch (userChoice) {
-                case "D" -> addDeposit();
+                case "D" -> System.out.println();
                 case "P" -> System.out.println("payment");
-                case "L" -> LedgerScreen.showLedger();
+                case "L" -> System.out.println();
                 case "X" -> {
                     System.out.println(" Closing!");
                     appRunning = false;
                 }
                 default -> System.out.println("That's not on the menu. Pick again!");
             }
-    }
-
-    // create an array list method to give back the parsed list
-    public static ArrayList<Transaction> readTransactions() throws IOException{
-        //make the list inisde the method
-        ArrayList<Transaction> parsedTransactions = new ArrayList<>();
-        //open the file so we can read it line by line
-        BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"));
-        // Read the first line (the header) and skip it
-        reader.readLine();
-        //This line will hold one line at a time
-        String line;
-        while ((line = reader.readLine()) != null){
-            String[] parts = line.split("\\|");
-            // Turn each piece into the right type
-            LocalDate date = LocalDate.parse(parts[0]);
-            LocalTime time = LocalTime.parse(parts[1]);
-            String description = parts[2];
-            String vendor = parts[3];
-            double amount = Double.parseDouble(parts[4]);
-
-            Transaction orderedTransaction = new Transaction(date, time , description , vendor , amount );
-            parsedTransactions.add(orderedTransaction);
         }
-        //closing the reader
-        reader.close();
-        //returning the parsed data
-        return parsedTransactions;
-
     }
+
+
     //create  the write method
     public static void writeTransaction(Transaction transaction)throws IOException {
         // Open the CSV file and add new information
