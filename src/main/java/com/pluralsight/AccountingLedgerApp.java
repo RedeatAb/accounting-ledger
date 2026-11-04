@@ -29,20 +29,6 @@ public class AccountingLedgerApp {
     public static void main(String[] args)throws IOException {
 
 
-
-        System.out.println("Transaction saved successfully!");
-
-
-        System.out.println("********************************* ");
-        System.out.println("                                  ");
-        System.out.println("                                  ");
-        System.out.println("          PRETTY PENNY             ");
-        System.out.println("    Cute outfits, cuter profits    ");
-        System.out.println("                                   ");
-        System.out.println("                                   ");
-        System.out.println("**********************************");
-
-        //displaying the home screen
         boolean appRunning = true;
         // using the while loop to display the home screen
         while (appRunning) {
@@ -58,7 +44,7 @@ public class AccountingLedgerApp {
             switch (userChoice) {
                 case "D" -> addDeposit();
                 case "P" -> System.out.println("payment");
-                case "L" -> System.out.println("ledger");
+                case "L" -> LedgerScreen.showLedger();
                 case "X" -> {
                     System.out.println(" Closing!");
                     appRunning = false;
@@ -66,12 +52,20 @@ public class AccountingLedgerApp {
                 default -> System.out.println("That's not on the menu. Pick again!");
             }
 
-
-
         }
-
-
     }
+    // method for the welcome message
+    public static void  welcomeMessage(){
+        System.out.println("********************************* ");
+        System.out.println("                                  ");
+        System.out.println("                                  ");
+        System.out.println("          PRETTY PENNY             ");
+        System.out.println("    Cute outfits, cuter profits    ");
+        System.out.println("                                   ");
+        System.out.println("                                   ");
+        System.out.println("**********************************");
+    }
+
     // create an array list method to give back the parsed list
     public static ArrayList<Transaction> readTransactions() throws IOException{
         //make the list inisde the method
