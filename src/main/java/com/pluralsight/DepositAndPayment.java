@@ -59,13 +59,27 @@ public class DepositAndPayment {
         String vendor = userInput.nextLine();
 
         // Ask how much was paid
-        System.out.print("Enter payment amount: ");
-        double amount = Double.parseDouble(userInput.nextLine());
+        double amount;
+        // Keep asking until the amount is valid
+        while (true) {
 
-        // Make sure the amount is greater than zero
-        if (amount <= 0) {
-            System.out.println("Payment must be greater than zero.");
-            return;
+            System.out.print("Enter payment amount: ");
+            String input = userInput.nextLine();
+
+            try {
+                // Convert input to a number
+                amount = Double.parseDouble(input);
+
+                if (!Double.isFinite(amount) || amount <= 0) {
+                    System.out.println("Bestie, enter an amount greater than zero!");
+                    continue; // ask again
+                }
+
+                break;// Stop loop if valid
+
+            } catch (NumberFormatException e) {
+                System.out.println("Oops bestie! Numbers only, please.");
+            }
         }
 
         // Convert payment into a negative amount because it is a payment
