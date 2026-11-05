@@ -23,7 +23,7 @@ public class ReportScreen {
             System.out.println("0.  Back to Ledger");
 
             System.out.print("Choose an option: ");
-
+            // creating try catch method for this
             String choice = AccountingLedgerApp.userInput.nextLine();
             try{
                 switch (choice) {
