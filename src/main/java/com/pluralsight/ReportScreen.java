@@ -1,7 +1,5 @@
 package com.pluralsight;
 //importing error handling, arraylist, date and time
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
@@ -24,26 +22,18 @@ public class ReportScreen {
             System.out.println("0.  Back to Ledger");
 
             System.out.print("Choose an option: ");
-            // creating try catch method for this
+
             String choice = AccountingLedgerApp.userInput.nextLine();
-            try {
-                switch (choice) {
+            switch (choice) {
 
-                    case "1" -> monthToDate();
-                    case "2" -> previousMonth();
-                    case "3" -> yearToDate();
-                    case "4" -> previousYear();
-                    case "5" -> searchByVendor();
-                    case "0" -> reportRunning = false;
+                case "1" -> monthToDate();
+                case "2" -> previousMonth();
+                case "3" -> yearToDate();
+                case "4" -> previousYear();
+                case "5" -> searchByVendor();
+                case "0" -> reportRunning = false;
 
-                    default -> System.out.println("Invalid choice!");
-                }
-
-            } catch (IOException e) {
-
-                // Displaying an error if the CSV file cannot be read
-                System.out.println("Error reading transactions.");
-                System.out.println(e.getMessage());
+                default -> System.out.println("Invalid choice!");
             }
 
 
@@ -51,7 +41,7 @@ public class ReportScreen {
     }
 
     // Method to display transactions from this month
-    public static void monthToDate() throws IOException {
+    public static void monthToDate() {
 
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
@@ -83,7 +73,7 @@ public class ReportScreen {
     }
 
     // Method to display transactions from last month
-    public static void previousMonth() throws IOException {
+    public static void previousMonth() {
 
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
@@ -114,7 +104,7 @@ public class ReportScreen {
     }
 
     // Method to display transactions from this year
-    public static void yearToDate() throws IOException {
+    public static void yearToDate()  {
 
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
@@ -146,7 +136,7 @@ public class ReportScreen {
     }
 
     // Method to display transactions from last year
-    public static void previousYear() throws IOException {
+    public static void previousYear() {
 
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
@@ -179,7 +169,7 @@ public class ReportScreen {
 
 
     // Method to search for transactions by vendor
-    public static void searchByVendor() throws IOException {
+    public static void searchByVendor() {
 
         // Asking the user for a vendor name
         System.out.print("Enter vendor name: ");
@@ -210,7 +200,7 @@ public class ReportScreen {
             }
         }
     }
-    // Sort transactions from newest to oldest
+    // Loop through the sorted transactions
     public static void sortTransactions(ArrayList<Transaction> transactions) {
 
         transactions.sort((a, b) -> {
