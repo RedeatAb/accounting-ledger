@@ -45,7 +45,7 @@ public class LoginScreen {
                 // Return true if login is successful
                 System.out.println(Colors.GREEN +
                         "♡ LoginScreen successful! " + Colors.RESET);
-
+                //return
                 return true;
             }
 
