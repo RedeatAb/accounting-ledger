@@ -50,17 +50,8 @@ public class LedgerScreen {
         ArrayList<Transaction> transactions =
                 ReadWriteTransaction.readTransactions();
 
-        // Sort from newest to oldest
-        transactions.sort((a, b) -> {
-            // Compare the dates of two transactions
-            int dateCompare = b.getDate().compareTo(a.getDate());
-            // If dates are different, sort by date
-            if (dateCompare != 0) {
-                return dateCompare;
-            }
-            // If dates are the same, sort by time
-            return b.getTime().compareTo(a.getTime());
-        });
+        // Sort transactions from newest to oldest
+        ReportScreen.sortTransactions(transactions);
 
 
         // Loop through the sorted transactions

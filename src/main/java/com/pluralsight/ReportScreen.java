@@ -1,5 +1,6 @@
 package com.pluralsight;
 //importing error handling, arraylist, date and time
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 //class that obtains report based on vendor or time
 public class ReportScreen {
     // This method displays the reports menu
-    public static void showReports()  {
+    public static void showReports() {
 
         // Keeps the reports menu running
         boolean reportRunning = true;
@@ -25,20 +26,20 @@ public class ReportScreen {
             System.out.print("Choose an option: ");
             // creating try catch method for this
             String choice = AccountingLedgerApp.userInput.nextLine();
-            try{
+            try {
                 switch (choice) {
 
-                    case "1" ->monthToDate() ;
-                    case "2" ->previousMonth();
+                    case "1" -> monthToDate();
+                    case "2" -> previousMonth();
                     case "3" -> yearToDate();
-                    case "4" ->previousYear();
+                    case "4" -> previousYear();
                     case "5" -> searchByVendor();
                     case "0" -> reportRunning = false;
 
                     default -> System.out.println("Invalid choice!");
                 }
 
-            }catch (IOException e) {
+            } catch (IOException e) {
 
                 // Displaying an error if the CSV file cannot be read
                 System.out.println("Error reading transactions.");
@@ -48,17 +49,20 @@ public class ReportScreen {
 
         }
     }
+
     // Method to display transactions from this month
     public static void monthToDate() throws IOException {
 
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
+        // Sort transactions from newest to oldest
+        sortTransactions(transactions);
 
         // Getting today's date
         LocalDate today = LocalDate.now();
 
-        // Looping backwards to show newest transactions first
-        for (int i = transactions.size() - 1; i >= 0; i--) {
+        // Loop through the sorted transactions
+        for (int i = 0; i < transactions.size(); i++) {
 
             // Getting one transaction from the list
             Transaction transaction = transactions.get(i);
@@ -77,17 +81,21 @@ public class ReportScreen {
             }
         }
     }
+
     // Method to display transactions from last month
     public static void previousMonth() throws IOException {
 
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
 
+        // Sort transactions from newest to oldest
+        sortTransactions(transactions);
+
         // Getting last month's date
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
 
-        // Looping backwards through the transactions
-        for (int i = transactions.size() - 1; i >= 0; i--) {
+        // Loop through the sorted transactions
+        for (int i = 0; i < transactions.size(); i++) {
 
             // Getting one transaction from the list
             Transaction transaction = transactions.get(i);
@@ -104,18 +112,21 @@ public class ReportScreen {
             }
         }
     }
+
     // Method to display transactions from this year
     public static void yearToDate() throws IOException {
 
         // Reading all transactions from the CSV file
-        ArrayList<Transaction> transactions =
-                ReadWriteTransaction.readTransactions();
+        ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
+
+        // Sort transactions from newest to oldest
+        sortTransactions(transactions);
 
         // Getting today's date
         LocalDate today = LocalDate.now();
 
-        // Looping backwards through the transactions
-        for (int i = transactions.size() - 1; i >= 0; i--) {
+        // Loop through the sorted transactions
+        for (int i = 0; i < transactions.size(); i++) {
 
             // Getting one transaction from the list
             Transaction transaction = transactions.get(i);
@@ -123,7 +134,7 @@ public class ReportScreen {
             // Getting the date of the transaction
             LocalDate date = transaction.getDate();
 
-            // Checking if the year matches the current year
+            // Checking if the transaction is from this year
             // Also checking that the date is not in the future
             if (date.getYear() == today.getYear()
                     && !date.isAfter(today)) {
@@ -134,19 +145,22 @@ public class ReportScreen {
         }
     }
 
-
     // Method to display transactions from last year
     public static void previousYear() throws IOException {
 
         // Reading all transactions from the CSV file
-        ArrayList<Transaction> transactions =
-                ReadWriteTransaction.readTransactions();
+        ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
+
+        // Sort transactions from newest to oldest
+        sortTransactions(transactions);
+
+
 
         // Getting last year
         int lastYear = LocalDate.now().getYear() - 1;
 
-        // Looping backwards through the transactions
-        for (int i = transactions.size() - 1; i >= 0; i--) {
+        // Loop through the sorted transactions
+        for (int i = 0; i < transactions.size(); i++) {
 
             // Getting one transaction from the list
             Transaction transaction = transactions.get(i);
@@ -162,6 +176,8 @@ public class ReportScreen {
             }
         }
     }
+
+
     // Method to search for transactions by vendor
     public static void searchByVendor() throws IOException {
 
@@ -174,9 +190,11 @@ public class ReportScreen {
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions =
                 ReadWriteTransaction.readTransactions();
+        // Sort transactions from newest to oldest
+        sortTransactions(transactions);
 
         // Looping backwards through the transactions
-        for (int i = transactions.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < transactions.size(); i++) {
 
             // Getting one transaction from the list
             Transaction transaction = transactions.get(i);
@@ -191,5 +209,22 @@ public class ReportScreen {
                 LedgerScreen.printTransaction(transaction);
             }
         }
+    }
+    // Sort transactions from newest to oldest
+    public static void sortTransactions(ArrayList<Transaction> transactions) {
+
+        transactions.sort((a, b) -> {
+
+            // Compare transaction dates
+            int dateCompare = b.getDate().compareTo(a.getDate());
+
+            // Sort by date if different
+            if (dateCompare != 0) {
+                return dateCompare;
+            }
+
+            // Sort by time if dates match
+            return b.getTime().compareTo(a.getTime());
+        });
     }
 }
