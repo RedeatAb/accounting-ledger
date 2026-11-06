@@ -30,7 +30,7 @@ public class LoginScreen {
 
             // Ask for password
             System.out.print(Colors.LAVENDER + "Password: " + Colors.RESET);
-            String enteredPassword = loginInput.nextLine();
+            String enteredPassword = loginInput.nextLine().trim();
             // Display authentication message
             System.out.println(Colors.LAVENDER +
                     "♡ Authenticating... Please wait ♡" + Colors.RESET);
@@ -44,7 +44,7 @@ public class LoginScreen {
 
                 // Return true if login is successful
                 System.out.println(Colors.GREEN +
-                        "♡ LoginScreen successful! " + Colors.RESET);
+                        "♡ Login successful! " + Colors.RESET);
                 //return
                 return true;
             }

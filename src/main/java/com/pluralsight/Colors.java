@@ -16,8 +16,6 @@ public class Colors {
         // Transaction colors
         public static final String GREEN = "\u001B[32m";
         public static final String RED = "\u001B[31m";
-        // Optional: bold, which makes the title pop
-        public static final String BOLD      = "\u001B[1m";
 
         // Bright orange for error messages
         public static final String ERROR = "\u001B[38;2;255;140;0m";

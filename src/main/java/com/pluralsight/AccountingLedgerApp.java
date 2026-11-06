@@ -84,19 +84,19 @@ public class AccountingLedgerApp {
         while (appRunning) {
 
 
-// Movie theater marquee lights
+           // Movie theater marquee lights
             System.out.print(Colors.NEON_PINK);
             System.out.println("\n   * * * * * * * * * * * * * * * * * *");
             System.out.println("   +----------------------------------+");
 
-// Lavender movie theater title
+           // Lavender movie theater title
             System.out.print(Colors.LAVENDER);
             System.out.println("   |                                  |");
             System.out.println("   |         * THE GLAM ROOM *        |");
             System.out.println("   |       NOW SHOWING: YOUR GLAM     |");
             System.out.println("   |                                  |");
 
-// Purple menu choices
+          // Purple menu choices
             System.out.print(Colors.PURPLE);
             System.out.println("   |   D) Treat your Wallet           |");
             System.out.println("   |      (Add Deposit)               |");

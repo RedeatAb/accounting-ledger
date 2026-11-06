@@ -97,6 +97,9 @@ public class ReportScreen {
         // Getting today's date
         LocalDate today = LocalDate.now();
 
+        printHeader();
+
+
         // Loop through the sorted transactions
         for (int i = 0; i < transactions.size(); i++) {
 
@@ -130,6 +133,9 @@ public class ReportScreen {
         // Getting last month's date
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
 
+        printHeader();
+
+
         // Loop through the sorted transactions
         for (int i = 0; i < transactions.size(); i++) {
 
@@ -160,6 +166,8 @@ public class ReportScreen {
 
         // Getting today's date
         LocalDate today = LocalDate.now();
+
+        printHeader();
 
         // Loop through the sorted transactions
         for (int i = 0; i < transactions.size(); i++) {
@@ -193,6 +201,8 @@ public class ReportScreen {
 
         // Getting last year
         int lastYear = LocalDate.now().getYear() - 1;
+
+        printHeader();
 
         // Loop through the sorted transactions
         for (int i = 0; i < transactions.size(); i++) {
@@ -228,6 +238,8 @@ public class ReportScreen {
         // Sort transactions from newest to oldest
         sortTransactions(transactions);
 
+        printHeader();
+
         //loops through the sorted  transaction
         for (int i = 0; i < transactions.size(); i++) {
 
@@ -262,5 +274,24 @@ public class ReportScreen {
             // Sort by time if dates match
             return b.getTime().compareTo(a.getTime());
         });
+    }
+
+    // This method displays the column names for the report
+    public static void printHeader() {
+
+        // Prints the headings in one row
+        System.out.printf(
+                "%-12s %-10s %-20s %-20s %10s%n",
+                "DATE",
+                "TIME",
+                "DESCRIPTION",
+                "VENDOR",
+                "AMOUNT"
+        );
+
+        // Prints a line to separate headings from transactions
+        System.out.println(
+                "--------------------------------------------------------------------------"
+        );
     }
 }

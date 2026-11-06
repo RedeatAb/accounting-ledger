@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class LedgerScreen {
     // Creating a method for the ledger menu
@@ -74,6 +75,8 @@ public class LedgerScreen {
 
         // Sort transactions from newest to oldest
         ReportScreen.sortTransactions(transactions);
+        //printing the header
+        ReportScreen.printHeader();
 
 
         // Loop through the sorted transactions
@@ -99,33 +102,37 @@ public class LedgerScreen {
         }
     }
 
-    // Method to print one transaction
-    public static void printTransaction (Transaction transaction) {
+    // This method prints each transaction in one row
+    public static void printTransaction(Transaction transaction) {
 
-        // Choose a color based on transaction type
+        // Stores the color used for the transaction amount
         String amountColor;
 
+        // Checks if the transaction is a deposit or payment
         if (transaction.getAmount() > 0) {
+            // Green for deposits
             amountColor = Colors.GREEN;
         } else {
+            // Red for payments
             amountColor = Colors.RED;
         }
+        // Formats the time to show only hours and minutes
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
-        // Print transaction details
-        System.out.println(Colors.LAVENDER + "Date: " + transaction.getDate() + Colors.RESET);
+        // Prints transaction details in one row
+        // Each number controls the space between columns
+        // Prints each transaction in one row with equal spacing
+        System.out.printf(
+                "%-12s %-10s %-35s %-25s %s%10.2f%s%n",
 
-        System.out.println(Colors.LAVENDER + "Time: " + transaction.getTime().withNano(0) + Colors.RESET);
-
-        System.out.println(Colors.PALE_PINK + "Description: " + transaction.getDescription() + Colors.RESET);
-
-        System.out.println(Colors.PALE_PINK + "Vendor: " + transaction.getVendor() + Colors.RESET);
-
-        System.out.printf(amountColor + "Amount: $%.2f%n" + Colors.RESET, transaction.getAmount());
-
-        // Cute divider between transactions
-        System.out.println(Colors.NEON_PINK + "♡ ─────────────────────────── ♡" + Colors.RESET);
-
-        System.out.println();
+                transaction.getDate(),             // Date column
+                transaction.getTime().format(timeFormat), // Time column
+                transaction.getDescription(),      // Description column
+                transaction.getVendor(),           // Vendor column
+                amountColor,                       // Amount color
+                transaction.getAmount(),           // Amount value
+                Colors.RESET                       // Reset text color
+        );
     }
 
 

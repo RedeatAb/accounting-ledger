@@ -64,7 +64,7 @@ public class ReadWriteTransaction {
 
             // Create a transaction line
             String line = transaction.getDate() + "|"
-                    + transaction.getTime().withNano(0) + "|"
+                    + transaction.getTime() + "|"
                     + transaction.getDescription() + "|"
                     + transaction.getVendor() + "|"
                     + transaction.getAmount();
