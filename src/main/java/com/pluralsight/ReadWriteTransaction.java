@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.io.File;
 
 public class ReadWriteTransaction {
     public static ArrayList<Transaction> readTransactions() {
@@ -42,11 +43,25 @@ public class ReadWriteTransaction {
 
     }
     public static void writeTransaction(Transaction transaction)  {
-        // Open the CSV file and add new information
-        try{BufferedWriter writer = new BufferedWriter(
+
+        // Get the CSV file
+        File file = new File("transactions.csv");
+
+        // Check if the file is new or empty
+        boolean needsHeader = !file.exists() || file.length() == 0;
+
+        try{
+            // Open file to add transactions
+            BufferedWriter writer = new BufferedWriter(
                 new FileWriter("transactions.csv", true));
 
-            // Get the information from the Transaction object
+            // Add header if needed
+            if (needsHeader) {
+                writer.write("date|time|description|vendor|amount");
+                writer.newLine();
+            }
+
+            // Create a transaction line
             String line = transaction.getDate() + "|"
                     + transaction.getTime().withNano(0) + "|"
                     + transaction.getDescription() + "|"
