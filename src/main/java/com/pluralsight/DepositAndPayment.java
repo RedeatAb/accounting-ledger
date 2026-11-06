@@ -15,7 +15,7 @@ public class DepositAndPayment {
 
     public static void addDeposit() {
 
-        // Ask the user what the deposit is for
+        // Ask the LoginScreen what the deposit is for
         System.out.print(Colors.PALE_PINK + "Enter deposit description: " + Colors.RESET);
         String description = userInput.nextLine();
 

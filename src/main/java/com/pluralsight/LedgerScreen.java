@@ -9,7 +9,7 @@ public class LedgerScreen {
     public static void showLedger() throws IOException {
         // Using a boolean to keep the menu running
         boolean ledgerRunning = true;
-        // Loop until the user chooses to go back
+        // Loop until the LoginScreen chooses to go back
         while (ledgerRunning) {
 
             System.out.println(Colors.NEON_PINK +
@@ -39,7 +39,7 @@ public class LedgerScreen {
             System.out.println("                    *   *");
             System.out.println("                      *" + Colors.RESET);
 
-            // Getting the user's input from the main class
+            // Getting the LoginScreen's input from the main class
             System.out.print(Colors.NEON_PINK +
                     "\nChoose wisely: " + Colors.RESET);
 
@@ -82,7 +82,7 @@ public class LedgerScreen {
             // Get one transaction
             Transaction transaction = transactions.get(i);
 
-            // Check which transactions the user wants to see
+            // Check which transactions the LoginScreen wants to see
             if (choice.equals("A")) {
                 //showing all the transactions
                 printTransaction(transaction);

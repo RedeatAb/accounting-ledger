@@ -13,7 +13,7 @@ public class ReportScreen {
         // Keeps the reports menu running
         boolean reportRunning = true;
 
-        // Keep showing the menu until the user exits
+        // Keep showing the menu until the LoginScreen exits
         while (reportRunning) {
 
             // Cute decorations
@@ -63,7 +63,7 @@ public class ReportScreen {
             System.out.println(Colors.PALE_PINK +
                     "  ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡" + Colors.RESET);
 
-            // User input
+            // LoginScreen input
             System.out.print(Colors.NEON_PINK +
                     "\n  Choose an option: " + Colors.RESET);
 
@@ -216,10 +216,10 @@ public class ReportScreen {
     // Method to search for transactions by vendor
     public static void searchByVendor() {
 
-        // Asking the user for a vendor name
+        // Asking the LoginScreen for a vendor name
         System.out.print("Enter vendor name: ");
 
-        // Saving the vendor name entered by the user
+        // Saving the vendor name entered by the LoginScreen
         String vendor = AccountingLedgerApp.userInput.nextLine();
 
         // Reading all transactions from the CSV file

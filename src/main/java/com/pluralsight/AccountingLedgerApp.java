@@ -20,13 +20,19 @@ public class AccountingLedgerApp {
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
 
-    public static void main(String[] args) throws  InterruptedException{
+    public static void main(String[] args) throws InterruptedException {
 
+
+        // First display the welcome message
         welcomeMessage();
-        // Wait 30 seconds
-        Thread.sleep(2000);
 
-        homeScreen();
+        // Next ask the user to log in
+        if (LoginScreen.login()) {
+
+            // Open the home screen only if login is successful
+            homeScreen();
+        }
+
 
     }
 
@@ -35,46 +41,43 @@ public class AccountingLedgerApp {
     public static void welcomeMessage() {
 
 
+        // Cute pink decorations
+        System.out.print(Colors.PALE_PINK);
+        System.out.println("\n  ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡");
+
+        // Neon pink boutique border
+        System.out.print(Colors.NEON_PINK);
+        System.out.println("  ╔══════════════════════════════════╗");
+        System.out.println("  ║                                  ║");
+
+        // Lavender boutique name
+        System.out.print(Colors.LAVENDER);
+        System.out.println("  ║       ✧  PRETTY PENNY  ✧         ║");
+
+        // Pale pink slogan
+        System.out.print(Colors.PALE_PINK);
+        System.out.println("  ║                                  ║");
+        System.out.println("  ║    Cute outfits, cuter profits   ║");
+        System.out.println("  ║                                  ║");
+
+        // Purple tagline
+        System.out.print(Colors.PURPLE);
+        System.out.println("  ║       ♡  THE GLAM LIFE  ♡        ║");
+
+        // Bottom border
+        System.out.print(Colors.NEON_PINK);
+        System.out.println("  ║                                  ║");
+        System.out.println("  ╚══════════════════════════════════╝");
+
+        // Matching decorations
+        System.out.print(Colors.PALE_PINK);
+        System.out.println("  ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡");
+
+        System.out.print(Colors.RESET);
+    }
 
 
-            // Cute pink decorations
-            System.out.print(Colors.PALE_PINK);
-            System.out.println("\n  ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡");
-
-            // Neon pink boutique border
-            System.out.print(Colors.NEON_PINK);
-            System.out.println("  ╔══════════════════════════════════╗");
-            System.out.println("  ║                                  ║");
-
-            // Lavender boutique name
-            System.out.print(Colors.LAVENDER);
-            System.out.println("  ║       ✧  PRETTY PENNY  ✧         ║");
-
-            // Pale pink slogan
-            System.out.print(Colors.PALE_PINK);
-            System.out.println("  ║                                  ║");
-            System.out.println("  ║    Cute outfits, cuter profits   ║");
-            System.out.println("  ║                                  ║");
-
-            // Purple tagline
-            System.out.print(Colors.PURPLE);
-            System.out.println("  ║       ♡  THE GLAM LIFE  ♡        ║");
-
-            // Bottom border
-            System.out.print(Colors.NEON_PINK);
-            System.out.println("  ║                                  ║");
-            System.out.println("  ╚══════════════════════════════════╝");
-
-            // Matching decorations
-            System.out.print(Colors.PALE_PINK);
-            System.out.println("  ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡");
-
-            System.out.print(Colors.RESET);
-        }
-
-
-
-        //method to for home screen
+    //method to for home screen
     public static void homeScreen() {
         boolean appRunning = true;
         // using the while loop to display the home screen
@@ -107,18 +110,17 @@ public class AccountingLedgerApp {
             System.out.println("   |   X) Bye Bestie! (Exit)          |");
             System.out.println("   |                                  |");
 
-         // Closing marquee lights
+            // Closing marquee lights
             System.out.print(Colors.NEON_PINK);
             System.out.println("   +----------------------------------+");
             System.out.println("   * * * * * * * * * * * * * * * * * *");
 
-        // Reset colors before input
+            // Reset colors before input
             System.out.print(Colors.RESET);
             System.out.println(Colors.PALE_PINK + "\nChoose your glam move: " + Colors.RESET);
 
 
-
-            // string to store the user choice
+            // string to store the LoginScreen choice
             String userChoice = userInput.nextLine().trim().toUpperCase();
             //create a switch statment to direct the choices in to the desired output
             try {
@@ -127,10 +129,11 @@ public class AccountingLedgerApp {
                     case "P" -> DepositAndPayment.makePayment();
                     case "L" -> LedgerScreen.showLedger();
                     case "X" -> {
-                        System.out.println( Colors.PALE_PINK + " Closing!" + Colors.RESET );
+                        System.out.println(Colors.PALE_PINK + " Closing!" + Colors.RESET);
                         appRunning = false;
                     }
-                    default -> System.out.println(Colors.PALE_PINK + "That's not on the menu. Pick again!" + Colors.RESET);
+                    default ->
+                            System.out.println(Colors.PALE_PINK + "That's not on the menu. Pick again!" + Colors.RESET);
                 }
             } catch (IOException e) {
 
