@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class LedgerScreen {
     // Creating a method for the ledger menu
-    public static void showLedger() throws IOException   {
+    public static void showLedger() throws IOException {
         // Using a boolean to keep the menu running
         boolean ledgerRunning = true;
         // Loop until the user chooses to go back
@@ -43,28 +43,41 @@ public class LedgerScreen {
         }
 
     }
+
     public static void showTransactions(String choice) throws IOException {
 
         // Calling the read method to get the saved transactions
         ArrayList<Transaction> transactions =
                 ReadWriteTransaction.readTransactions();
 
+        // Sort from newest to oldest
+        transactions.sort((a, b) -> {
+            // Compare the dates of two transactions
+            int dateCompare = b.getDate().compareTo(a.getDate());
+            // If dates are different, sort by date
+            if (dateCompare != 0) {
+                return dateCompare;
+            }
+            // If dates are the same, sort by time
+            return b.getTime().compareTo(a.getTime());
+        });
 
-        // Looping through the list backwards to show newest entries first
-        for (int i = transactions.size() - 1; i >= 0; i--) {
 
-            //getting one transaction from list
+        // Loop through the sorted transactions
+        for (int i = 0; i < transactions.size(); i++) {
+
+            // Get one transaction
             Transaction transaction = transactions.get(i);
+
+            // Check which transactions the user wants to see
             if (choice.equals("A")) {
                 //showing all the transactions
                 printTransaction(transaction);
-            }
-            else if (choice.equals("D") && transaction.getAmount() > 0) {
+            } else if (choice.equals("D") && transaction.getAmount() > 0) {
                 //showing deposits
                 printTransaction(transaction);
 
-            }
-            else if (choice.equals("P") && transaction.getAmount() < 0) {
+            } else if (choice.equals("P") && transaction.getAmount() < 0) {
                 //showing payments
                 printTransaction(transaction);
 
@@ -73,18 +86,19 @@ public class LedgerScreen {
         }
     }
 
-        // Method to print one transaction
-        public static void printTransaction(Transaction transaction) {
+    // Method to print one transaction
+    public static void printTransaction(Transaction transaction) {
 
-            System.out.println("Date: " + transaction.getDate());
-            System.out.println("Time: " + transaction.getTime().withNano(0));
-            System.out.println("Description: " + transaction.getDescription());
-            System.out.println("Vendor: " + transaction.getVendor());
-            System.out.println("Amount: $" + transaction.getAmount());
+        System.out.println("Date: " + transaction.getDate());
+        System.out.println("Time: " + transaction.getTime().withNano(0));
+        System.out.println("Description: " + transaction.getDescription());
+        System.out.println("Vendor: " + transaction.getVendor());
 
-        }
-
+        System.out.printf("Amount: $%.2f%n", transaction.getAmount());
 
     }
+
+
+}
 
 
