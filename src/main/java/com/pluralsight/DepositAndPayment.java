@@ -60,7 +60,7 @@ public class DepositAndPayment {
         // Save deposit into the CSV file
         ReadWriteTransaction.writeTransaction(deposit);
 
-        System.out.println("Deposit saved successfully!");
+
     }
 
 
@@ -113,7 +113,7 @@ public class DepositAndPayment {
         // Save payment into the CSV file
         ReadWriteTransaction.writeTransaction(payment);
 
-        System.out.println("Payment saved successfully!");
+
     }
 
 }

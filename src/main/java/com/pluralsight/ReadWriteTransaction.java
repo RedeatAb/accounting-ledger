@@ -62,8 +62,10 @@ public class ReadWriteTransaction {
             // Close the writer
             writer.close();
 
+            System.out.println("Transaction saved successfully!");
+
         }catch(IOException e){
-            System.out.println("sorry could not save the file ");
+            System.out.println("sorry could not save the transaction ");
         }
 
 
