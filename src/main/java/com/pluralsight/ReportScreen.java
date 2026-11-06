@@ -258,20 +258,22 @@ public class ReportScreen {
         }
     }
 
-    // Loop through the sorted transactions
+    // Sort transactions from newest to oldest
     public static void sortTransactions(ArrayList<Transaction> transactions) {
 
+        // Lambda expression (a, b) -> compares two transactions
+        // a and b represent two Transaction objects
         transactions.sort((a, b) -> {
 
-            // Compare transaction dates
+            // Compare dates, newest first
             int dateCompare = b.getDate().compareTo(a.getDate());
 
-            // Sort by date if different
+            // If dates are different, sort by date
             if (dateCompare != 0) {
                 return dateCompare;
             }
 
-            // Sort by time if dates match
+            // If dates are the same, sort by latest time
             return b.getTime().compareTo(a.getTime());
         });
     }

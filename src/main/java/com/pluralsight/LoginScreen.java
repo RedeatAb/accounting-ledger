@@ -11,8 +11,8 @@ public class LoginScreen {
 
 
         // Preset username and password
-        String username = "admin";
-        String password = "Pretty123";
+        String username = "Rae";
+        String password = "StarGirl101";
 
         // Count how many times the user tries to log in
         int attempts = 0;
