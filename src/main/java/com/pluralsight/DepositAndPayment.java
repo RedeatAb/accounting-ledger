@@ -22,26 +22,42 @@ public class DepositAndPayment {
         System.out.print("Enter vendor: ");
         String vendor = userInput.nextLine();
 
-        // Ask how much money was deposited
-        System.out.print("Enter deposit amount: ");
-        double amount = Double.parseDouble(userInput.nextLine());
+        // Store the deposit amount
+        double amount;
 
-        // Make sure the deposit is positive
-        if (amount <= 0) {
-            System.out.println("Deposit must be greater than zero.");
-            return;
+        // Keep asking until the amount is valid
+        while (true) {
+
+            System.out.print("Enter deposit amount: ");
+            String input = userInput.nextLine();
+
+            try {
+                // Convert input to a number
+                amount = Double.parseDouble(input);
+
+                // Check if the amount is valid
+                if (!Double.isFinite(amount) || amount <= 0) {
+                    System.out.println("Bestie, enter an amount greater than zero!");
+                    continue; // Ask again
+                }
+
+                break; // Stop loop if valid
+
+            } catch (NumberFormatException e) {
+                System.out.println("Oops bestie! Numbers only, please.");
+            }
         }
 
-        // Get the current date and time
+        // Get current date and time
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        // Create a new transaction
+        // Create a deposit transaction
         Transaction deposit = new Transaction(
                 date, time, description, vendor, amount
         );
 
-        // Save the deposit into the CSV file
+        // Save deposit into the CSV file
         ReadWriteTransaction.writeTransaction(deposit);
 
         System.out.println("Deposit saved successfully!");
