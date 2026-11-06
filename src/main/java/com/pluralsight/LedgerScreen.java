@@ -12,15 +12,37 @@ public class LedgerScreen {
         // Loop until the user chooses to go back
         while (ledgerRunning) {
 
-            System.out.println("\n--- THE MONEY DIARIES ---");
-            System.out.println("A) All Transactions");
-            System.out.println("D) Deposits Only");
-            System.out.println("P) Payments Only");
-            System.out.println("R) Reports");
-            System.out.println("H) Back to the Glam Room");
+            System.out.println(Colors.NEON_PINK +
+                    "\n             ******       ******");
+            System.out.println("          ***      *** ***      ***");
+            System.out.println("        **            *            **");
+            System.out.println("       *                             *");
+
+            System.out.println(Colors.LAVENDER +
+                    "      *       ♡ THE MONEY DIARIES ♡   *");
+
+            System.out.println(Colors.PALE_PINK +
+                    "      *                               *");
+            System.out.println("       *   A) All Transactions       *");
+            System.out.println("        *  D) Deposits Only         *");
+            System.out.println("         * P) Payments Only        *");
+            System.out.println("          * R) Reports            *");
+
+            System.out.println(Colors.PURPLE +
+                    "           * H) Back to Glam Room*");
+
+            System.out.println(Colors.NEON_PINK +
+                    "            *                   *");
+            System.out.println("              *               *");
+            System.out.println("                *           *");
+            System.out.println("                  *       *");
+            System.out.println("                    *   *");
+            System.out.println("                      *" + Colors.RESET);
 
             // Getting the user's input from the main class
-            System.out.print("Choose wisely: ");
+            System.out.print(Colors.NEON_PINK +
+                    "\nChoose wisely: " + Colors.RESET);
+
 
             String choice = AccountingLedgerApp.userInput.nextLine().trim().toUpperCase();
 
@@ -78,18 +100,38 @@ public class LedgerScreen {
     }
 
     // Method to print one transaction
-    public static void printTransaction(Transaction transaction) {
+    public static void printTransaction (Transaction transaction) {
 
-        System.out.println("Date: " + transaction.getDate());
-        System.out.println("Time: " + transaction.getTime().withNano(0));
-        System.out.println("Description: " + transaction.getDescription());
-        System.out.println("Vendor: " + transaction.getVendor());
+        // Choose a color based on transaction type
+        String amountColor;
 
-        System.out.printf("Amount: $%.2f%n", transaction.getAmount());
+        if (transaction.getAmount() > 0) {
+            amountColor = Colors.GREEN;
+        } else {
+            amountColor = Colors.RED;
+        }
 
+        // Print transaction details
+        System.out.println(Colors.LAVENDER + "Date: " + transaction.getDate() + Colors.RESET);
+
+        System.out.println(Colors.LAVENDER + "Time: " + transaction.getTime().withNano(0) + Colors.RESET);
+
+        System.out.println(Colors.PALE_PINK + "Description: " + transaction.getDescription() + Colors.RESET);
+
+        System.out.println(Colors.PALE_PINK + "Vendor: " + transaction.getVendor() + Colors.RESET);
+
+        System.out.printf(amountColor + "Amount: $%.2f%n" + Colors.RESET, transaction.getAmount());
+
+        // Cute divider between transactions
+        System.out.println(Colors.NEON_PINK + "♡ ─────────────────────────── ♡" + Colors.RESET);
+
+        System.out.println();
     }
 
 
 }
+
+
+
 
 

@@ -29,14 +29,15 @@ public class ReadWriteTransaction {
                 String description = parts[2];
                 String vendor = parts[3];
                 double amount = Double.parseDouble(parts[4]);
-
+                // creating new transaction object with the parsed values
                 Transaction orderedTransaction = new Transaction(date, time, description, vendor, amount);
+                //added it to the new array
                 parsedTransactions.add(orderedTransaction);
             }
             //closing the reader
             reader.close();
         } catch(IOException e){
-            System.out.println("Unable to read the transaction file");
+            System.out.println(Colors.ERROR + "Unable to read the transaction file" + Colors.RESET);
         }
         //returning the parsed data
         return parsedTransactions;
@@ -77,10 +78,10 @@ public class ReadWriteTransaction {
             // Close the writer
             writer.close();
 
-            System.out.println("Transaction saved successfully!");
+            System.out.println(Colors.GREEN + "Transaction saved successfully!"+ Colors.RESET);
 
         }catch(IOException e){
-            System.out.println("sorry could not save the transaction ");
+            System.out.println( Colors.ERROR + "sorry could not save the transaction " + Colors.RESET);
         }
 
 

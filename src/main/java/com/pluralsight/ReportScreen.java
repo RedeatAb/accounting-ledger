@@ -1,29 +1,74 @@
 package com.pluralsight;
 //importing error handling, arraylist, date and time
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 
 //class that obtains report based on vendor or time
 public class ReportScreen {
     // This method displays the reports menu
+
     public static void showReports() {
 
         // Keeps the reports menu running
         boolean reportRunning = true;
+
         // Keep showing the menu until the user exits
         while (reportRunning) {
 
-            System.out.println("\n THE MONEY REPORT ");
-            System.out.println("1.Month to Date");
-            System.out.println("2.Previous Month");
-            System.out.println("3.Year to Date");
-            System.out.println("4. Previous Year");
-            System.out.println("5. Search by Vendor");
-            System.out.println("0.  Back to Ledger");
+            // Cute decorations
+            System.out.println(Colors.PALE_PINK +
+                    "\n  ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡" + Colors.RESET);
 
-            System.out.print("Choose an option: ");
+            // Pink border
+            System.out.println(Colors.NEON_PINK +
+                    "  ╔════════════════════════════════╗");
+            System.out.println("  ║                                ║");
+
+            // Lavender title
+            System.out.println(Colors.LAVENDER +
+                    "  ║      ✧ THE MONEY REPORT ✧      ║");
+
+            // Menu options
+            System.out.println(Colors.NEON_PINK +
+                    "  ║                                ║");
+
+            System.out.println(Colors.PALE_PINK +
+                    "  ║   1. Month to Date             ║");
+
+            System.out.println(Colors.LAVENDER +
+                    "  ║   2. Previous Month            ║");
+
+            System.out.println(Colors.PALE_PINK +
+                    "  ║   3. Year to Date              ║");
+
+            System.out.println(Colors.LAVENDER +
+                    "  ║   4. Previous Year             ║");
+
+            System.out.println(Colors.PURPLE +
+                    "  ║   5. Search by Vendor          ║");
+
+            System.out.println(Colors.NEON_PINK +
+                    "  ║                                ║");
+
+            System.out.println(Colors.PURPLE +
+                    "  ║   0. Back to Ledger            ║");
+
+            // Closing border
+            System.out.println(Colors.NEON_PINK +
+                    "  ║                                ║");
+            System.out.println("  ╚════════════════════════════════╝");
+
+            // Bottom decorations
+            System.out.println(Colors.PALE_PINK +
+                    "  ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡ ✧ ♡" + Colors.RESET);
+
+            // User input
+            System.out.print(Colors.NEON_PINK +
+                    "\n  Choose an option: " + Colors.RESET);
 
             String choice = AccountingLedgerApp.userInput.nextLine();
+
             switch (choice) {
 
                 case "1" -> monthToDate();
@@ -33,12 +78,13 @@ public class ReportScreen {
                 case "5" -> searchByVendor();
                 case "0" -> reportRunning = false;
 
-                default -> System.out.println("Invalid choice!");
+                default -> System.out.println(
+                        Colors.ERROR + "Invalid choice!" + Colors.RESET
+                );
             }
-
-
         }
     }
+
 
     // Method to display transactions from this month
     public static void monthToDate() {
@@ -104,7 +150,7 @@ public class ReportScreen {
     }
 
     // Method to display transactions from this year
-    public static void yearToDate()  {
+    public static void yearToDate() {
 
         // Reading all transactions from the CSV file
         ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
@@ -145,7 +191,6 @@ public class ReportScreen {
         sortTransactions(transactions);
 
 
-
         // Getting last year
         int lastYear = LocalDate.now().getYear() - 1;
 
@@ -178,12 +223,12 @@ public class ReportScreen {
         String vendor = AccountingLedgerApp.userInput.nextLine();
 
         // Reading all transactions from the CSV file
-        ArrayList<Transaction> transactions =
-                ReadWriteTransaction.readTransactions();
+        ArrayList<Transaction> transactions = ReadWriteTransaction.readTransactions();
+
         // Sort transactions from newest to oldest
         sortTransactions(transactions);
 
-        // Looping backwards through the transactions
+        //loops through the sorted  transaction
         for (int i = 0; i < transactions.size(); i++) {
 
             // Getting one transaction from the list
@@ -200,6 +245,7 @@ public class ReportScreen {
             }
         }
     }
+
     // Loop through the sorted transactions
     public static void sortTransactions(ArrayList<Transaction> transactions) {
 
